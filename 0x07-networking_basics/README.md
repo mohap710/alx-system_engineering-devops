@@ -40,11 +40,11 @@
 3. The OSI model is a model that characterizes the communication functions of a telecommunication system with a strong regard for their underlying internal structure and technology
 
 `How is the OSI model organized?`
-<ul>
-    <ol>Alphabetically</ol>
-    <ol>From the lowest to the highest level</ol>
-    <ol>Randomly</ol>
-</ul>
+<ol>
+    <li>Alphabetically</li>
+    <li>From the lowest to the highest level</li>
+    <li>Randomly</li>
+</ol>
 
 
 </details>
