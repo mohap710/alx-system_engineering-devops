@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# to test conncet using command : tel net localhost 98
+nc -l localhost 98

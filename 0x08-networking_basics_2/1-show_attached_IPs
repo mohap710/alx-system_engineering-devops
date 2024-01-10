@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Displays all acive IPv4 addresses on the machine.
+# `ip -4 -o add show` => show Ipv4 address like this :
+# 1: lo    inet 127.0.0.1/8 scope host lo\       valid_lft forever preferred_lft forever
+# awk '{print $4}' will print the 4th argument for each ip:
+# 127.0.0.1/8
+# cut -d "/" -f 1 : used to remove /8 => 127.0.0.1
+ip -4 -o addr show | awk '{print $4}' | cut -d "/" -f 1
