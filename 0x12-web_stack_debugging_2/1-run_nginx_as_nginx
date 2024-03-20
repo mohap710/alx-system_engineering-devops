@@ -1,7 +1,21 @@
 #!/usr/bin/env bash
-#run nginx as the nginx user
+
+# Ensure nginx user exists
+if ! id -u nginx &> /dev/null; then
+  adduser --system --group --disabled-password nginx
+fi
+
+# Set permissions on nginx.conf
 chmod 644 /etc/nginx/nginx.conf
-sed -Ei 's/\s*#?\s*user .*/user nginx;/' /etc/nginx/nginx.conf
-sed -Ei 's/(listen (\[::\]:)?8080) /\180 /' /etc/nginx/sites-enabled/default
-kill -s 9 "$(pgrep apache2)"
-sudo su nginx -s /bin/bash --command="service nginx restart"
+
+# Configure user in nginx.conf
+sed -i 's/\s*#?\s*user .*/user nginx;/' /etc/nginx/nginx.conf
+
+# Update listen port in default site
+sed -i 's/(listen (\[::\]:)?8080) /\180 /' /etc/nginx/sites-enabled/default
+
+# Stop any running Apache process (if applicable)
+pkill -f apache2 &> /dev/null
+
+# Start nginx as the nginx user
+gosu nginx service nginx restart
